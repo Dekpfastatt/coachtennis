@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "151509678183",
+    "project_id": "coachtennis-12125",
+    "storage_bucket": "coachtennis-12125.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151509678183:android:f838e4ac51bb171d527cc2",
+        "android_client_info": {
+          "package_name": "com.example.coachtennis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "151509678183-t6fv8l1llt78gq5o0tma4s5m3mbdifjq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxflafkfSITxliuisYqZ8sU3iVvKn41LY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "151509678183-t6fv8l1llt78gq5o0tma4s5m3mbdifjq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
