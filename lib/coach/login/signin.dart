@@ -4,10 +4,10 @@ import 'package:coachtennis/coach/login/passwordreset.dart';
 import 'package:coachtennis/main.dart';
 import 'package:flutter/material.dart';
 
-import 'signup.dart';
+import '../signup/signupscreen.dart';
 
 class SignIn extends StatelessWidget {
-  const SignIn({Key? key}) : super(key: key);
+  const SignIn({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +88,7 @@ class SignIn extends StatelessWidget {
               child: const Text('Do not have an account? Sign Up'),
               onTap: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => SignUp()),
+                  MaterialPageRoute(builder: (_) => SignUpScreen()),
                 );
               },
             ),
