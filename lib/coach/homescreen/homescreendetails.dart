@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:coachtennis/coach/homescreen/model/coachschedule.dart';
 import 'package:flutter/material.dart';
 
 import 'coachschedule/editcoachschedule.dart';
@@ -102,7 +101,8 @@ class _HomeScreenDetailsState extends State<HomeScreenDetails> {
                                 onPressed: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                        builder: (_) => EditCoachSchedule()),
+                                        builder: (_) => EditCoachSchedule(
+                                            coachschedule: docsnapshot)),
                                   );
                                 },
                               ),
