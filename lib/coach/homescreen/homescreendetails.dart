@@ -47,71 +47,78 @@ class _HomeScreenDetailsState extends State<HomeScreenDetails> {
                     final DocumentSnapshot docsnapshot =
                         streamSnapshot.data.docs[index];
                     return Card(
+                      elevation: 50,
                       margin: EdgeInsets.all(10.0),
+                      shape: RoundedRectangleBorder(
+                          side: BorderSide(color: Colors.orange, width: 0.5),
+                          borderRadius: BorderRadius.circular(15)),
                       child: Column(
                         children: [
-                          ListTile(
-                              title: Text(
+                          //text1
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
                                 docsnapshot['scheduledate'].toString(),
                                 style: TextStyle(color: Colors.green),
                               ),
-                              subtitle:
-                                  Text(docsnapshot['clubdetails'].toString()),
-                              trailing: SizedBox(
-                                  width: 200,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Text(docsnapshot['studentname']
-                                                .toString()),
-                                          ]),
-                                      Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Text('Start:  '),
-                                            Text(
-                                              docsnapshot['timefrom']
-                                                  .toString(),
-                                              style:
-                                                  TextStyle(color: Colors.red),
-                                            ),
-                                            Text('  End:  '),
-                                            Text(
-                                              docsnapshot['timeto'].toString(),
-                                              style:
-                                                  TextStyle(color: Colors.red),
-                                            ),
-                                          ]),
-                                    ],
-                                  ))),
+                              //text2
+                              Text(docsnapshot['clubdetails'].toString()),
+                              //text3
+                              Text(docsnapshot['studentname'].toString()),
+                            ],
+                          ),
+
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              IconButton(
-                                icon: Icon(Icons.edit),
-                                onPressed: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                        builder: (_) => EditCoachSchedule(
-                                            coachschedule: docsnapshot)),
-                                  );
-                                },
+                              //Start and End
+                              Column(
+                                children: [
+                                  Row(children: [
+                                    SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    Text('Start:  '),
+                                    Text(
+                                      docsnapshot['timefrom'].toString(),
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                  ]),
+                                  Row(
+                                    children: [
+                                      Text('  End:  '),
+                                      Text(
+                                        docsnapshot['timeto'].toString(),
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                              IconButton(
-                                icon: Icon(Icons.delete),
-                                onPressed: () {
-                                  _deleteschedule(docsnapshot.id);
-                                },
-                              )
+                              // icons
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  IconButton(
+                                    icon: Icon(Icons.edit),
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (_) => EditCoachSchedule(
+                                                coachschedule: docsnapshot)),
+                                      );
+                                    },
+                                  ),
+                                  IconButton(
+                                    icon: Icon(Icons.delete),
+                                    onPressed: () {
+                                      _deleteschedule(docsnapshot.id);
+                                    },
+                                  )
+                                ],
+                              ),
                             ],
                           ),
                         ],
@@ -126,3 +133,32 @@ class _HomeScreenDetailsState extends State<HomeScreenDetails> {
     );
   }
 }
+
+// class EditWidgets extends StatelessWidget {
+//   const EditWidgets({ Key key }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                             children: [
+//                               IconButton(
+//                                 icon: Icon(Icons.edit),
+//                                 onPressed: () {
+//                                   Navigator.of(context).push(
+//                                     MaterialPageRoute(
+//                                         builder: (_) => EditCoachSchedule(
+//                                             coachschedule: docsnapshot)),
+//                                   );
+//                                 },
+//                               ),
+//                               IconButton(
+//                                 icon: Icon(Icons.delete),
+//                                 onPressed: () {
+//                                   _deleteschedule(docsnapshot.id);
+//                                 },
+//                               )
+//                             ],
+//                           );
+//   }
+// }
