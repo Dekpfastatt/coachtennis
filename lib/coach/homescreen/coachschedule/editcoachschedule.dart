@@ -25,6 +25,8 @@ class _EditCoachScheduleState extends State<EditCoachSchedule> {
     studentController.text = widget.coachschedule['studentname'];
     clubController.text = widget.coachschedule['clubdetails'];
     timeFromController.text = widget.coachschedule['timefrom'];
+    dateController.text = widget.coachschedule['scheduledate'];
+    timeToController.text = widget.coachschedule['timeto'];
   }
 
   @override
@@ -44,32 +46,31 @@ class _EditCoachScheduleState extends State<EditCoachSchedule> {
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 30),
-            // Expanded(
-            //   child: Container(
-            //       width: 300,
-            //       child: TextFormField(
-            //         initialValue: widget.coachschedule['scheduledate'],
-            //         controller: dateController,
-            //         decoration: const InputDecoration(
-            //             labelText: "Schedule date",
-            //             hintText: "Schedule date",
-            //             border: OutlineInputBorder()),
-            //         autofocus: false,
-            //         onTap: () async {
-            //           DateTime date = DateTime(2021);
-            //           DateFormat formatter = DateFormat('dd/MM/yyyy');
-            //           FocusScope.of(context).requestFocus(new FocusNode());
-            //           date = await showDatePicker(
-            //               context: context,
-            //               initialDate: DateTime.now(),
-            //               firstDate: DateTime(2021),
-            //               lastDate: DateTime(2100));
+            Expanded(
+              child: Container(
+                  width: 300,
+                  child: TextFormField(
+                    controller: dateController,
+                    decoration: const InputDecoration(
+                        labelText: "Schedule date",
+                        hintText: "Schedule date",
+                        border: OutlineInputBorder()),
+                    autofocus: false,
+                    onTap: () async {
+                      DateTime date = DateTime(2021);
+                      DateFormat formatter = DateFormat('dd/MM/yyyy');
+                      FocusScope.of(context).requestFocus(new FocusNode());
+                      date = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2021),
+                          lastDate: DateTime(2100));
 
-            //           dateController.text = formatter.format(date);
-            //         },
-            //       )),
-            // ),
-            // const SizedBox(height: 10),
+                      dateController.text = formatter.format(date);
+                    },
+                  )),
+            ),
+            const SizedBox(height: 10),
             Expanded(
               child: Container(
                 width: 300,
@@ -130,38 +131,37 @@ class _EditCoachScheduleState extends State<EditCoachSchedule> {
               ),
             ),
             const SizedBox(height: 10),
-            // Expanded(
-            //   child: Container(
-            //     width: 300,
-            //     child: TextFormField(
-            //       initialValue: widget.coachschedule['timeto'].toString(),
-            //       controller: timeToController,
-            //       decoration: const InputDecoration(
-            //           labelText: "Time To",
-            //           hintText: "Time To",
-            //           border: OutlineInputBorder()),
-            //       autofocus: false,
-            //       onTap: () async {
-            //         TimeOfDay pickedTime = await showTimePicker(
-            //           initialTime: TimeOfDay.now(),
-            //           context: context,
-            //         );
+            Expanded(
+              child: Container(
+                width: 300,
+                child: TextFormField(
+                  controller: timeToController,
+                  decoration: const InputDecoration(
+                      labelText: "Time To",
+                      hintText: "Time To",
+                      border: OutlineInputBorder()),
+                  autofocus: false,
+                  onTap: () async {
+                    TimeOfDay pickedTime = await showTimePicker(
+                      initialTime: TimeOfDay.now(),
+                      context: context,
+                    );
 
-            //         if (pickedTime != null) {
-            //           DateTime parsedTime = DateFormat.jm()
-            //               .parse(pickedTime.format(context).toString());
-            //           String formattedTime =
-            //               DateFormat('HH:mm').format(parsedTime);
-            //           setState(() {
-            //             timeToController.text = formattedTime;
-            //           });
-            //         } else {
-            //           print("Time is not selected");
-            //         }
-            //       },
-            //     ),
-            //   ),
-            // ),
+                    if (pickedTime != null) {
+                      DateTime parsedTime = DateFormat.jm()
+                          .parse(pickedTime.format(context).toString());
+                      String formattedTime =
+                          DateFormat('HH:mm').format(parsedTime);
+                      setState(() {
+                        timeToController.text = formattedTime;
+                      });
+                    } else {
+                      print("Time is not selected");
+                    }
+                  },
+                ),
+              ),
+            ),
             const SizedBox(height: 20),
             ElevatedButton(
                 child: const Text("Update Schedule"),
