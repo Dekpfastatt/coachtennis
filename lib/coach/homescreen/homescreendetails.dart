@@ -52,76 +52,78 @@ class _HomeScreenDetailsState extends State<HomeScreenDetails> {
                       shape: RoundedRectangleBorder(
                           side: BorderSide(color: Colors.orange, width: 0.5),
                           borderRadius: BorderRadius.circular(15)),
-                      child: Column(
-                        children: [
-                          //text1
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                docsnapshot['scheduledate'].toString(),
-                                style: TextStyle(color: Colors.green),
-                              ),
-                              //text2
-                              Text(docsnapshot['clubdetails'].toString()),
-                              //text3
-                              Text(docsnapshot['studentname'].toString()),
-                            ],
-                          ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //text1
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  docsnapshot['scheduledate'].toString(),
+                                  style: TextStyle(color: Colors.green),
+                                ),
+                                //text2
+                                Text(docsnapshot['clubdetails'].toString()),
+                                //text3
+                                Text(docsnapshot['studentname'].toString()),
+                              ],
+                            ),
 
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              //Start and End
-                              Column(
-                                children: [
-                                  Row(children: [
-                                    SizedBox(
-                                      width: 10.0,
-                                    ),
-                                    Text('Start:  '),
-                                    Text(
-                                      docsnapshot['timefrom'].toString(),
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                  ]),
-                                  Row(
-                                    children: [
-                                      Text('  End:  '),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                //Start and End
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(children: [
+                                      Text('Start:  '),
                                       Text(
-                                        docsnapshot['timeto'].toString(),
+                                        docsnapshot['timefrom'].toString(),
                                         style: TextStyle(color: Colors.red),
                                       ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              // icons
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  IconButton(
-                                    icon: Icon(Icons.edit),
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (_) => EditCoachSchedule(
-                                                coachschedule: docsnapshot)),
-                                      );
-                                    },
-                                  ),
-                                  IconButton(
-                                    icon: Icon(Icons.delete),
-                                    onPressed: () {
-                                      _deleteschedule(docsnapshot.id);
-                                    },
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
+                                    ]),
+                                    Row(
+                                      children: [
+                                        Text('End:  '),
+                                        Text(
+                                          docsnapshot['timeto'].toString(),
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                // icons
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    IconButton(
+                                      icon: Icon(Icons.edit),
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (_) => EditCoachSchedule(
+                                                  coachschedule: docsnapshot)),
+                                        );
+                                      },
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.delete),
+                                      onPressed: () {
+                                        _deleteschedule(docsnapshot.id);
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
