@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'coachschedule/editcoachschedule.dart';
 import 'coachschedule/newcoachschedule.dart';
+import 'widgets/labelwidget.dart';
 
 class HomeScreenDetails extends StatefulWidget {
   //const HomeScreenDetails({ Key? key }) : super(key: key);
@@ -57,71 +58,8 @@ class _HomeScreenDetailsState extends State<HomeScreenDetails> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            //text1
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  docsnapshot['scheduledate'].toString(),
-                                  style: TextStyle(color: Colors.green),
-                                ),
-                                //text2
-                                Text(docsnapshot['clubdetails'].toString()),
-                                //text3
-                                Text(docsnapshot['studentname'].toString()),
-                              ],
-                            ),
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                //Start and End
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(children: [
-                                      Text('Start:  '),
-                                      Text(
-                                        docsnapshot['timefrom'].toString(),
-                                        style: TextStyle(color: Colors.red),
-                                      ),
-                                    ]),
-                                    Row(
-                                      children: [
-                                        Text('End:  '),
-                                        Text(
-                                          docsnapshot['timeto'].toString(),
-                                          style: TextStyle(color: Colors.red),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                // icons
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    IconButton(
-                                      icon: Icon(Icons.edit),
-                                      onPressed: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (_) => EditCoachSchedule(
-                                                  coachschedule: docsnapshot)),
-                                        );
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.delete),
-                                      onPressed: () {
-                                        _deleteschedule(docsnapshot.id);
-                                      },
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
+                            HeaderWidget(docsnapshot),
+                            FooterWidget(docsnapshot),
                           ],
                         ),
                       ),
@@ -134,33 +72,96 @@ class _HomeScreenDetailsState extends State<HomeScreenDetails> {
       ),
     );
   }
+
+  Widget HeaderWidget(DocumentSnapshot docsnapshot) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        CircleAvatar(
+          radius: 20,
+          backgroundImage: AssetImage('splashscreen1.jpg'),
+        ),
+        SizedBox(width: 20),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            LabelWidget(
+              labelText: docsnapshot['studentname'].toString(),
+              colorText: Colors.green,
+              sizeText: 22,
+            ),
+            LabelWidget(
+              labelText: docsnapshot['clubdetails'].toString(),
+              colorText: Colors.white,
+              sizeText: 13,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget FooterWidget(DocumentSnapshot docsnapshot) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        //Start and End
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            LabelWidget(
+              labelText: docsnapshot['scheduledate'].toString(),
+              colorText: Colors.red,
+              sizeText: 16,
+            ),
+            Row(children: [
+              LabelWidget(
+                labelText: "Start:",
+                colorText: Colors.white,
+              ),
+              SizedBox(width: 10),
+              LabelWidget(
+                labelText: docsnapshot['timefrom'].toString(),
+                colorText: Colors.white,
+              ),
+              SizedBox(width: 10),
+              LabelWidget(
+                labelText: "End:",
+                colorText: Colors.white,
+              ),
+              SizedBox(width: 10),
+              LabelWidget(
+                labelText: docsnapshot['timeto'].toString(),
+                colorText: Colors.white,
+              ),
+            ]),
+          ],
+        ),
+        // icons
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              color: Colors.white,
+              icon: Icon(Icons.edit),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (_) =>
+                          EditCoachSchedule(coachschedule: docsnapshot)),
+                );
+              },
+            ),
+            IconButton(
+              color: Colors.red,
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                _deleteschedule(docsnapshot.id);
+              },
+            )
+          ],
+        ),
+      ],
+    );
+  }
 }
-
-// class EditWidgets extends StatelessWidget {
-//   const EditWidgets({ Key key }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                             children: [
-//                               IconButton(
-//                                 icon: Icon(Icons.edit),
-//                                 onPressed: () {
-//                                   Navigator.of(context).push(
-//                                     MaterialPageRoute(
-//                                         builder: (_) => EditCoachSchedule(
-//                                             coachschedule: docsnapshot)),
-//                                   );
-//                                 },
-//                               ),
-//                               IconButton(
-//                                 icon: Icon(Icons.delete),
-//                                 onPressed: () {
-//                                   _deleteschedule(docsnapshot.id);
-//                                 },
-//                               )
-//                             ],
-//                           );
-//   }
-// }
