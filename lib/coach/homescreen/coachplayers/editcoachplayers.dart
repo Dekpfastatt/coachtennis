@@ -127,7 +127,7 @@ class _EditCoachPlayersState extends State<EditCoachPlayers> {
                   final String email = emailController.text.trim();
                   final String mobile = mobileController.text.trim();
 
-                  final firestoreInstance = FirebaseFirestore.instance;
+                  //final firestoreInstance = FirebaseFirestore.instance;
 
                   if (firstname.isEmpty &&
                       lastname.isEmpty &&
@@ -136,8 +136,10 @@ class _EditCoachPlayersState extends State<EditCoachPlayers> {
                       mobile.isEmpty) {
                     print("Missing input");
                   } else {
-                    var coachplayers = FirebaseAuth.instance.currentUser;
-                    firestoreInstance.collection("coachplayers").add({
+                    final firestoreInstance =
+                        FirebaseFirestore.instance.collection('coachplayers');
+                    // var coachplayers = FirebaseAuth.instance.currentUser;
+                    firestoreInstance.doc(widget.coachplayers.id).update({
                       "firstname": firstname.toString(),
                       "lastname": lastname.toString(),
                       "clubname": club.toString(),

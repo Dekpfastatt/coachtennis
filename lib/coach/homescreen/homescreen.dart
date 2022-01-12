@@ -40,39 +40,40 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
-              Feather.home,
+              Icons.home,
               color: Colors.red,
             ),
             label: "Home",
             activeIcon: Icon(
-              Feather.home,
+              Icons.home,
               color: Colors.green,
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Feather.list,
+              Icons.account_box_outlined,
+              color: Colors.red,
+            ),
+            label: "Clubs",
+            activeIcon: Icon(
+              Icons.account_box_outlined,
+              color: Colors.green,
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.group,
               color: Colors.red,
             ),
             label: "Players",
             activeIcon: Icon(
-              Feather.list,
-              color: Colors.green,
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Feather.settings,
-              color: Colors.red,
-            ),
-            label: "Settings",
-            activeIcon: Icon(
-              Feather.settings,
+              Icons.group,
               color: Colors.green,
             ),
           ),
