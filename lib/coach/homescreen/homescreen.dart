@@ -19,8 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   List<Widget> _widgetOption = <Widget>[
     HomeScreenDetails(),
-    ListOfClubScreen(),
     ListOfPlayerScreen(),
+    ListOfClubScreen(),
     PaiementScreen()
   ];
 
@@ -57,23 +57,23 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.account_box_outlined,
-              color: Colors.red,
-            ),
-            label: "Clubs",
-            activeIcon: Icon(
-              Icons.account_box_outlined,
-              color: Colors.green,
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.group,
               color: Colors.red,
             ),
             label: "Players",
             activeIcon: Icon(
               Icons.group,
+              color: Colors.green,
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.account_box_outlined,
+              color: Colors.red,
+            ),
+            label: "Clubs",
+            activeIcon: Icon(
+              Icons.account_box_outlined,
               color: Colors.green,
             ),
           ),

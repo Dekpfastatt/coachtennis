@@ -78,6 +78,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  currency_icons:
+    dependency: "direct main"
+    description:
+      name: currency_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
   dots_indicator:
     dependency: transitive
     description:

@@ -36,6 +36,7 @@ dependencies:
   provider: ^4.3.3
   flutter_icons: ^1.1.0
   intl: ^0.17.0
+  currency_icons: ^0.3.0
   
 
 

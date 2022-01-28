@@ -15,6 +15,8 @@ class HomeScreenDetails extends StatefulWidget {
 }
 
 class _HomeScreenDetailsState extends State<HomeScreenDetails> {
+  DocumentSnapshot coachschedule;
+
   CollectionReference _coachschedule =
       FirebaseFirestore.instance.collection('coachschedule');
 
@@ -23,6 +25,15 @@ class _HomeScreenDetailsState extends State<HomeScreenDetails> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text('You have successfuly deleted!'),
     ));
+  }
+
+  Future<void> _updatepaiement(String coachdetails, bool val) async {
+    CollectionReference firestoreInstance =
+        FirebaseFirestore.instance.collection('coachschedule');
+
+    firestoreInstance.doc(coachdetails).update({
+      "paiement": val,
+    });
   }
 
   @override
@@ -97,7 +108,33 @@ class _HomeScreenDetailsState extends State<HomeScreenDetails> {
             ),
           ],
         ),
+        //SizedBox(width: 100),
+        PaidWidget(docsnapshot),
       ],
+    );
+  }
+
+  Widget PaidWidget(DocumentSnapshot docsnapshot) {
+    return Expanded(
+      child: IconButton(
+        alignment: Alignment.topRight,
+        icon: docsnapshot['paiement'] == true
+            ? Icon(
+                Icons.paid_outlined,
+                color: Colors.yellow,
+                size: 40.0,
+              )
+            : Icon(
+                Icons.paid_outlined,
+                color: Colors.red,
+                size: 40.0,
+              ),
+        onPressed: () {
+          if (docsnapshot['paiement'] == false)
+            _updatepaiement(docsnapshot.id, true);
+          setState(() {});
+        },
+      ),
     );
   }
 

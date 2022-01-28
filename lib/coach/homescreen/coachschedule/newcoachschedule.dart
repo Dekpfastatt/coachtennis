@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +18,7 @@ class _NewCoachScheduleState extends State<NewCoachSchedule> {
   TextEditingController clubController = new TextEditingController();
   TextEditingController timeFromController = new TextEditingController();
   TextEditingController timeToController = new TextEditingController();
-
+  bool _paiementvalue = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,6 +152,28 @@ class _NewCoachScheduleState extends State<NewCoachSchedule> {
                 ),
               ),
             ),
+            Expanded(
+              child: Column(
+                children: [
+                  Switch(
+                    value: _paiementvalue,
+                    onChanged: (value) {
+                      setState(() {
+                        _paiementvalue = value;
+                      });
+                    },
+                    activeColor: Colors.green,
+                    activeTrackColor: Colors.grey,
+                    inactiveTrackColor: Colors.yellow,
+                    inactiveThumbColor: Colors.red,
+                  ),
+                  Text(
+                    'Amount to be paid: 30€',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(height: 20),
             ElevatedButton(
                 child: const Text("Add Schedule"),
@@ -163,6 +187,7 @@ class _NewCoachScheduleState extends State<NewCoachSchedule> {
                   final String timefrom = timeFromController.text.trim();
                   final String timeto = timeToController.text.trim();
                   final String club = clubController.text.trim();
+                  final bool paiement = _paiementvalue;
 
                   final firestoreInstance = FirebaseFirestore.instance;
 
@@ -180,12 +205,14 @@ class _NewCoachScheduleState extends State<NewCoachSchedule> {
                       "studentname": student.toString(),
                       "timefrom": timefrom.toString(),
                       "timeto": timeto.toString(),
+                      "paiement": _paiementvalue,
                     });
                     dateController.text = '';
                     studentController.text = '';
                     timeFromController.text = '';
                     timeToController.text = '';
                     clubController.text = '';
+                    _paiementvalue = false;
 
                     Navigator.of(context).pop();
                   }

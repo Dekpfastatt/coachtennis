@@ -45,6 +45,7 @@ class _ListOfPlayerScreenState extends State<ListOfPlayerScreen> {
                     final DocumentSnapshot docsnapshot =
                         streamSnapshot.data.docs[index];
                     return Card(
+                      color: Colors.green[200],
                       elevation: 50,
                       margin: EdgeInsets.all(10.0),
                       shape: RoundedRectangleBorder(
@@ -74,22 +75,17 @@ class _ListOfPlayerScreenState extends State<ListOfPlayerScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        CircleAvatar(
-          radius: 20,
-          backgroundImage: AssetImage('splashscreen1.jpg'),
-        ),
-        SizedBox(width: 20),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             LabelWidget(
               labelText: docsnapshot['firstname'].toString(),
-              colorText: Colors.green,
+              colorText: Colors.orange,
               sizeText: 22,
             ),
             LabelWidget(
               labelText: docsnapshot['lastname'].toString(),
-              colorText: Colors.white,
+              colorText: Colors.black,
               sizeText: 13,
             ),
           ],
@@ -109,12 +105,12 @@ class _ListOfPlayerScreenState extends State<ListOfPlayerScreen> {
             Row(children: [
               LabelWidget(
                 labelText: "Club:",
-                colorText: Colors.white,
+                colorText: Colors.black,
               ),
               SizedBox(width: 10),
               LabelWidget(
                 labelText: docsnapshot['clubname'].toString(),
-                colorText: Colors.white,
+                colorText: Colors.black,
               ),
             ]),
           ],
@@ -124,7 +120,7 @@ class _ListOfPlayerScreenState extends State<ListOfPlayerScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
-              color: Colors.white,
+              color: Colors.black,
               icon: Icon(Icons.edit),
               onPressed: () {
                 Navigator.of(context).push(
