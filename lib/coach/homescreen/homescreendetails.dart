@@ -27,14 +27,14 @@ class _HomeScreenDetailsState extends State<HomeScreenDetails> {
     ));
   }
 
-  Future<void> _updatepaiement(String coachdetails, bool val) async {
-    CollectionReference firestoreInstance =
-        FirebaseFirestore.instance.collection('coachschedule');
+  // Future<void> _updatepaiement(String coachdetails, bool val) async {
+  //   CollectionReference firestoreInstance =
+  //       FirebaseFirestore.instance.collection('coachschedule');
 
-    firestoreInstance.doc(coachdetails).update({
-      "paiement": val,
-    });
-  }
+  //   firestoreInstance.doc(coachdetails).update({
+  //     "paiement": val,
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -109,34 +109,50 @@ class _HomeScreenDetailsState extends State<HomeScreenDetails> {
           ],
         ),
         //SizedBox(width: 100),
-        PaidWidget(docsnapshot),
+        //PaidWidget(docsnapshot),
+        Expanded(
+          child: IconButton(
+            alignment: Alignment.topRight,
+            icon: docsnapshot['paiement'] == true
+                ? Icon(
+                    Icons.paid_outlined,
+                    color: Colors.yellow,
+                    size: 40.0,
+                  )
+                : Icon(
+                    Icons.paid_outlined,
+                    color: Colors.red,
+                    size: 40.0,
+                  ),
+          ),
+        )
       ],
     );
   }
 
-  Widget PaidWidget(DocumentSnapshot docsnapshot) {
-    return Expanded(
-      child: IconButton(
-        alignment: Alignment.topRight,
-        icon: docsnapshot['paiement'] == true
-            ? Icon(
-                Icons.paid_outlined,
-                color: Colors.yellow,
-                size: 40.0,
-              )
-            : Icon(
-                Icons.paid_outlined,
-                color: Colors.red,
-                size: 40.0,
-              ),
-        // onPressed: () {
-        //   if (docsnapshot['paiement'] == false)
-        //     _updatepaiement(docsnapshot.id, true);
-        //   setState(() {});
-        // },
-      ),
-    );
-  }
+  // Widget PaidWidget(DocumentSnapshot docsnapshot) {
+  //   return Expanded(
+  //     child: IconButton(
+  //       alignment: Alignment.topRight,
+  //       icon: docsnapshot['paiement'] == true
+  //           ? Icon(
+  //               Icons.paid_outlined,
+  //               color: Colors.yellow,
+  //               size: 40.0,
+  //             )
+  //           : Icon(
+  //               Icons.paid_outlined,
+  //               color: Colors.red,
+  //               size: 40.0,
+  //             ),
+  //       // onPressed: () {
+  //       //   if (docsnapshot['paiement'] == false)
+  //       //     _updatepaiement(docsnapshot.id, true);
+  //       //   setState(() {});
+  //       // },
+  //     ),
+  //   );
+  // }
 
   Widget FooterWidget(DocumentSnapshot docsnapshot) {
     return Row(

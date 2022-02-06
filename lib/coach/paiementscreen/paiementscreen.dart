@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coachtennis/coach/homescreen/coachschedule/editcoachschedule.dart';
 import 'package:coachtennis/coach/homescreen/coachschedule/newcoachschedule.dart';
+import 'package:coachtennis/coach/homescreen/test.dart';
 import 'package:coachtennis/coach/homescreen/widgets/labelwidget.dart';
 import 'package:coachtennis/coach/paiementscreen/paiementscreendetail.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class _PaiementScreenState extends State<PaiementScreen> {
   DocumentSnapshot coachschedule;
   int totalamountpaid = 0;
   int totalamountunpaid = 0;
+  int indexval = 0;
 
   CollectionReference _coachschedule =
       FirebaseFirestore.instance.collection('coachschedule');
@@ -36,30 +38,33 @@ class _PaiementScreenState extends State<PaiementScreen> {
 
                     // calculate Total
                     //docsnapshot['paiement'].toString(),
-                    if (docsnapshot['paiement'] == true) {
-                      totalamountpaid += 30;
-                      print('totalamountpaid $totalamountpaid');
+                    if (indexval <= index) {
+                      if (docsnapshot['paiement'] == true) {
+                        totalamountpaid += 30;
+                      } else {
+                        totalamountunpaid += 30;
+                      }
+                      indexval++;
+                      return Text('');
                     } else {
-                      totalamountunpaid += 30;
-                      print('totalamountunpaid $totalamountunpaid');
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          LabelWidget(
+                            labelText: totalamountpaid.toString(),
+                            colorText: Colors.green,
+                            sizeText: 30,
+                          ),
+                          SizedBox(width: 100),
+                          LabelWidget(
+                            labelText: totalamountunpaid.toString(),
+                            colorText: Colors.red,
+                            sizeText: 30,
+                          ),
+                          SizedBox(height: 10),
+                        ],
+                      );
                     }
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        LabelWidget(
-                          labelText: totalamountpaid.toString(),
-                          colorText: Colors.green,
-                          sizeText: 30,
-                        ),
-                        SizedBox(width: 100),
-                        LabelWidget(
-                          labelText: totalamountunpaid.toString(),
-                          colorText: Colors.red,
-                          sizeText: 30,
-                        ),
-                        SizedBox(height: 10),
-                      ],
-                    );
 
                     //} //else
                     // return Card(
