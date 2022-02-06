@@ -155,18 +155,20 @@ class _NewCoachScheduleState extends State<NewCoachSchedule> {
             Expanded(
               child: Column(
                 children: [
-                  Switch(
-                    value: _paiementvalue,
-                    onChanged: (value) {
-                      setState(() {
-                        _paiementvalue = value;
-                      });
-                    },
-                    activeColor: Colors.green,
-                    activeTrackColor: Colors.grey,
-                    inactiveTrackColor: Colors.yellow,
-                    inactiveThumbColor: Colors.red,
-                  ),
+                  Transform.scale(
+                      scale: 2.0,
+                      child: Switch(
+                        value: _paiementvalue,
+                        onChanged: (value) {
+                          setState(() {
+                            _paiementvalue = value;
+                          });
+                        },
+                        activeColor: Colors.green,
+                        activeTrackColor: Colors.grey,
+                        inactiveTrackColor: Colors.grey,
+                        inactiveThumbColor: Colors.red,
+                      )),
                   Text(
                     'Amount to be paid: 30€',
                     style: TextStyle(color: Colors.white),

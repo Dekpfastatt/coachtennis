@@ -129,11 +129,11 @@ class _HomeScreenDetailsState extends State<HomeScreenDetails> {
                 color: Colors.red,
                 size: 40.0,
               ),
-        onPressed: () {
-          if (docsnapshot['paiement'] == false)
-            _updatepaiement(docsnapshot.id, true);
-          setState(() {});
-        },
+        // onPressed: () {
+        //   if (docsnapshot['paiement'] == false)
+        //     _updatepaiement(docsnapshot.id, true);
+        //   setState(() {});
+        // },
       ),
     );
   }

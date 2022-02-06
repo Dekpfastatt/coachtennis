@@ -17,7 +17,7 @@ class _EditCoachScheduleState extends State<EditCoachSchedule> {
   TextEditingController clubController = new TextEditingController();
   TextEditingController timeFromController = new TextEditingController();
   TextEditingController timeToController = new TextEditingController();
-
+  bool _paiementvalue = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -162,6 +162,30 @@ class _EditCoachScheduleState extends State<EditCoachSchedule> {
                 ),
               ),
             ),
+            Expanded(
+              child: Column(
+                children: [
+                  Transform.scale(
+                      scale: 2.0,
+                      child: Switch(
+                        value: _paiementvalue,
+                        onChanged: (value) {
+                          setState(() {
+                            _paiementvalue = value;
+                          });
+                        },
+                        activeColor: Colors.green,
+                        activeTrackColor: Colors.grey,
+                        inactiveTrackColor: Colors.grey,
+                        inactiveThumbColor: Colors.red,
+                      )),
+                  Text(
+                    'Amount to be paid: 30€',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(height: 20),
             ElevatedButton(
                 child: const Text("Update Schedule"),
@@ -170,11 +194,12 @@ class _EditCoachScheduleState extends State<EditCoachSchedule> {
                   onPrimary: Colors.white,
                 ),
                 onPressed: () {
-                  //final String dateSchedule = dateController.text.trim();
+                  final String dateSchedule = dateController.text.trim();
                   final String student = studentController.text.trim();
                   final String timefrom = timeFromController.text.trim();
-                  //final String timeto = timeToController.text.trim();
+                  final String timeto = timeToController.text.trim();
                   final String club = clubController.text.trim();
+                  final bool paiement = _paiementvalue;
 
                   final firestoreInstance =
                       FirebaseFirestore.instance.collection('coachschedule');
@@ -183,15 +208,19 @@ class _EditCoachScheduleState extends State<EditCoachSchedule> {
                     print("Missing input");
                   } else {
                     firestoreInstance.doc(widget.coachschedule.id).update({
+                      "scheduledate": dateSchedule.toString(),
                       "clubdetails": club.toString(),
                       "studentname": student.toString(),
                       "timefrom": timefrom.toString(),
+                      "timeto": timeto.toString(),
+                      "paiement": paiement.toString(),
                     });
-                    //dateController.text = '';
+                    dateController.text = '';
                     studentController.text = '';
                     timeFromController.text = '';
-                    //timeToController.text = '';
+                    timeToController.text = '';
                     clubController.text = '';
+                    _paiementvalue = false;
 
                     Navigator.of(context).pop();
                   }
